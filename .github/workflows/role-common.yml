@@ -1,0 +1,54 @@
+---
+name: Reusable Role Test Workflow
+
+on:
+  workflow_call:
+    inputs:
+      role_name:
+        required: true
+        type: string
+        description: Name of the role to test
+      python_version:
+        required: false
+        type: string
+        default: "3.12"
+        description: Python version to use
+
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+
+    env:
+      COLLECTIONS_PATH: ansible_collections/okb/system
+
+    strategy:
+      matrix:
+        distro:
+          - ubuntu-2204
+          - ubuntu-2404
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: ${{ env.COLLECTIONS_PATH }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python_version }}
+
+      - name: Install molecule dependencies
+        run: |
+          echo "PWD: $(pwd)"
+          python3 -m pip install --upgrade pip
+          pip install -r ${{ env.COLLECTIONS_PATH }}/requirements.txt
+
+      - name: Run molecule tests
+        run: |
+          cd ${{ env.COLLECTIONS_PATH }}/roles/${{ inputs.role_name }}
+          molecule test
+        env:
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"

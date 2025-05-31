@@ -1,0 +1,36 @@
+---
+namespace: okb
+name: system
+version: 0.0.0
+readme: README.md
+
+authors:
+  - Fernando Aleman <faleman@1000bulbs.com>
+
+description: System administration collection for common infrastructure tasks
+
+license:
+  - MIT
+license_file: LICENSE
+
+tags:
+  - system
+  - infrastructure
+  - linux
+  - administration
+
+dependencies: {}
+
+repository: https://github.com/1000Bulbs/ansible.system
+
+documentation: https://github.com/1000Bulbs/ansible.system
+
+homepage: https://github.com/1000Bulbs/ansible.system
+
+issues: https://github.com/1000Bulbs/ansible.system/issues
+
+build_ignore:
+  - "*.tar.gz"
+  - .git
+  - .github
+  - tests
