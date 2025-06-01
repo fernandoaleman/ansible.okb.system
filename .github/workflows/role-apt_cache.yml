@@ -1,0 +1,21 @@
+---
+name: Test apt_cache role
+
+"on":
+  push:
+    paths:
+      - roles/apt_cache/**
+      - .github/workflows/role-apt_cache.yml
+
+  pull_request:
+    paths:
+      - roles/apt_cache/**
+      - .github/workflows/role-apt_cache.yml
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    uses: ./.github/workflows/role-common.yml
+    with:
+      role_name: apt_cache

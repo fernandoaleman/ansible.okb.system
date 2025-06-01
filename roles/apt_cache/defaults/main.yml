@@ -1,0 +1,12 @@
+---
+# Time in seconds before apt cache is considered outdated
+apt_cache_valid_time: 86400
+
+# Number of retries for updating the apt cache
+apt_cache_update_cache_retries: 5
+
+# Maximum delay in seconds between apt cache update retries
+apt_cache_update_cache_retry_max_delay: 12
+
+# Force usage of apt-get instead of aptitude for cache updates
+apt_cache_force_apt_get: true
